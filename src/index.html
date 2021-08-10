@@ -2,11 +2,46 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Data Lovers</title>
+    <title>Studio Ghibli</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="root"></div>
+  <header>
+    <div class="encabezado">
+      <h1>STUDIO GHIBLI</h1>
+    </div>
+      <!-- <nav>
+        <ul>
+          <li>About</li>
+          <li>Filmography</li>
+          <li>Characters</li>
+          <li>More Details</li>
+        </ul>
+      </nav> -->
+    </header> 
+    <!-- <img src="images/totoro.png"> -->
+    <main>
+      <div class="filters">
+        <!-- <button id="button">A-Z</button>
+        <input type="search" id="search" placeholder="search"> -->
+        <select id="order_film" class="order-film"></select>
+        <select id="films" class="filter"></select>
+        <select id="directors" class="filter2"></select>
+        <div id="container" class="container"></div>
+        <div class="container" id="orderFilm"></div>
+        <div class="container" id="orderFilm2"></div>
+        <div id="infoFilms"></div>
+        <button id="button-inicio" class="button-inicio">Inicio</button>
+      </div>
+        <!-- <section>
+          <img class="imgTotoro" src="images/totoro.gif">
+          <p class="parrafo">El nombre del estudio, Ghibli, proviene del término con el cual los italianos denominaban a sus aviones de exploración del Sáhara durante la Segunda Guerra Mundial. Se dice que sus fundadores quisieron usar este nombre, cuyo significado es “viento cálido soplando a través del Sáhara, para dar a entender que traían nuevos aires al mundo de la animación japonesa.</p>
+        </section> -->
+       
+     <!-- <button id="button-1" class="button-1">Ascendente</button> 
+     <button id="button-2" class="button-2">Descendente</button>  -->
+    </main>
     <script src="main.js" type="module"></script>
+    <footer></footer>
   </body>
 </html>
