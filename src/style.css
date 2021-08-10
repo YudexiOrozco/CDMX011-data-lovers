@@ -64,6 +64,7 @@ body {
 
 }
 
+
 .container {
   margin-top: 100px;
   margin-left: 80px;
@@ -163,6 +164,16 @@ body {
 
 }
 
+.film-title2 {
+  position: absolute;
+  font-weight: bold;
+  font-size: 30px;
+  width: 500px;
+  height: 35px;
+  left: 400px;
+  top: 20px;
+}
+
 
 
 .btn {
@@ -198,10 +209,45 @@ body {
 .description {
   width: 500px;
   left: 400px;
-  position: relative;
+  position: absolute;
+  top: 100px;
   
+}
+
+/* seccion personajes */
+.wrapper-grid-people {
+  display:inline-flex;
+  grid-template-columns: minmax(300px, 1fr);
+  grid-gap: 2rem;
+  justify-content: center;
+  top: 400px;
+  position: relative;
 
 }
+
+.container-people {
+  overflow: hidden;
+  box-shadow: 0px 4px 9px 0px var(--clr-gray-light);
+  background-color: white;
+  text-align: center;
+  /* border-radius: 1rem; */
+  position:relative;
+  margin: 20px;
+  height: 400px;
+  width: 300px;
+
+  --card-gradient: rgba(0, 0, 0, 0.8);
+  --card-gradient: #5e9ad9, #e271ad;
+  
+  overflow: hidden;
+}
+
+.container-people .img-poster{
+
+  width: 100%;
+  height: 100%;
+}
+
 
 @media screen and (min-width: 400px) {
   .wrapper-grid {

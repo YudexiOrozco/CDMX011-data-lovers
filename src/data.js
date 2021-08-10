@@ -4,24 +4,13 @@ import dataStudio from './data/ghibli/ghibli.js'
 export function sendData(){
   return dataStudio.films;
 }
-// let data = sendData();
+let data = sendData();
 
-// const hayaoDirector = data.filter(film => film.director == 'Hayao Miyazaki' )
-// const peopleHayo = hayaoDirector.filter(people => people.name)
+// let hayaoDirector = data.filter(film => film.director == 'Hayao Miyazaki' )
+let hayaoDirector = data.filter(film => film.people.length > 0)
 
-// function people(films) {
-//   peopleDirectors = {};
-
-//   films.forEach(film => {
-//     let titleFilm = film.title.toLowerCase().replaceAll(' ', '_'); 
-//     peopleDirectors[director] = {};
-//     peopleDirectors[director][]
-
-//   })
-
-
-// }
-
+ console.log(hayaoDirector)
+ 
 
 // let data = sendData();
 

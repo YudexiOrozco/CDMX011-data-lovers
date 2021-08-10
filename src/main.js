@@ -88,13 +88,13 @@ function selectOrder(){
        if (select === 'Descendente') {
         
           html3 += `<div id="wrapper-grid" class="wrapper-grid">
-                    <div class="container-2">
-                    <img class="img-poster" src="${film.poster}">
-                      <div class="capa">
-                      <h2 class="film-title">${film.title}</h2>
+                      <div class="container-2">
+                      <img class="img-poster" src="${film.poster}">
+                        <div class="capa">
+                        <h2 class="film-title">${film.title}</h2>
+                        </div>
                       </div>
-                  </div>
-                </div>`
+                    </div>`
       }
 
     })
@@ -154,37 +154,45 @@ function fillSelect() {
  
   
   nuevoElemento.addEventListener("click", () => {
-
-    
      allData.forEach(film => {
      
        if (nuevoElemento.id === film.id) {
       
          container.innerHTML = ''
-         infoFilms.innerHTML =
+          let element =
           `<div class="divSection">
             <section class="poster-section">
-              <h2 class="film-title">${film.title}</h2>
               <img src="${film.poster}">
             </section>
+            <h2 class="film-title2">${film.title}</h2>
               <h3 class="description">${film.description}</h3>
+              
+          </div>
+        `
 
-              <div class="section-people">
-                    <div class="container-people">${film.people.map(person => {
-                    return `${person.name} <img src="${person.img}"></div>`;
+        film.people.forEach(person => {
+          element += `<div class="wrapper-grid-people">
+                        <div class="container-people">
+                        <h2 class="film-title">${person.name}</h2>
+                        <img class="img-poster" src="${person.img}">
+                      
+                        </div>
+                      </div>`
+
+        })
+
+        infoFilms.innerHTML = element
+        
+      }
 
 
-              })}</div>
-             
-           
-       `
+  })
        
-       }
 
-     })
+       
+  })
       
     });
-  })
 }
 
 filmSelect.addEventListener("change", function() {
