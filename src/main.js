@@ -5,23 +5,79 @@ let allData = sendData();
 
 let filmSelect = document.getElementById('films');
 let container = document.getElementById('container');
+
 let directors = document.getElementById('directors');
 let infoFilms = document.getElementById('infoFilms');
 let orderFilm = document.getElementById('orderFilm');
 let orderFilm2 = document.getElementById('orderFilm2');
 let order_film = document.getElementById('order_film');
 let buttonInicio = document.getElementById('button-inicio');
+let btnFilms = document.getElementById('btnFilms');
+// let containerSlider = document.getElementById('container-slider');
+// let encabezado = document.getElementByI("encabezado");
 
 let allDirectors = getIdDirectors(allData);
-// let datosFilm = datosFilm(allData);
-// let button1 = document.getElementById('button-1');
-// let button2 = document.getElementById('button-2');
 
- //creamos las opciones y se las agregamos al padre select con appendChild
- //en cada recorrido por getIdTitles se crea una 'option'en select
- //text, lo que el usuario ve y value, evalua el texto por id
 
-//Para el select de ordenado
+btnFilms.addEventListener('click', function() {
+
+  container.style = "display: block";
+  slider.style = "display: none";
+  btnFilms.style = "display: none";
+  filmSelect.style = "display: block";
+  directors.style = "display: block";
+  order_film.style = "display: block";
+  buttonInicio.style = "display: block";
+
+});
+
+
+let slider = document.querySelector("#slider");
+let sliderSection = document.querySelectorAll(".slider-section");
+let sliderSectionLast = sliderSection[sliderSection.length -1];
+
+const btnLeft = document.querySelector("#btn-left");
+const btnRight = document.querySelector("#btn-right");
+
+slider.insertAdjacentElement('afterbegin', sliderSectionLast);
+
+function sliderNext() {
+  let sliderSectionFirst = document.querySelectorAll(".slider-section")[0];
+  slider.style.marginLeft = "-200%";
+  slider.style.transition = "all 0.5s";
+  setTimeout(function() {
+    slider.style.transition = "none";
+    slider.insertAdjacentElement('beforeend', sliderSectionFirst);
+    slider.style.marginLeft = "-100%";
+  }, 500);
+}
+
+function sliderPrev() {
+  let sliderSection = document.querySelectorAll(".slider-section");
+  let sliderSectionLast = sliderSection[sliderSection.length -1];
+  slider.style.marginLeft = "0";
+  slider.style.transition = "all 0.5s";
+  setTimeout(function() {
+    slider.style.transition = "none";
+    slider.insertAdjacentElement('afterbegin', sliderSectionLast);
+    slider.style.marginLeft = "-100%";
+  }, 500);
+}
+
+btnRight.addEventListener('click', function() {
+  sliderNext();
+});
+
+
+btnLeft.addEventListener('click', function() {
+  sliderPrev();
+});
+
+setInterval(() => {
+  sliderNext();
+}, 5000);
+
+
  
 function selectOrder(){
 
@@ -63,9 +119,22 @@ function selectOrder(){
     let html2 = '';
     let html3 = '';
     let select = (order_film.value);
-    container.innerHTML = ''
+    container.innerHTML = '';
+    orderFilm.innerHTML= '';   
+    orderFilm2.innerHTML= '';
+    infoFilms.innerHTML = '';
 
-    datosFilm.forEach(film => {
+
+    let data = datosFilm;
+    let directorValue = directors.value;
+
+    if(directorValue != 'all') {
+      let name = allDirectors[directorValue].name_director;
+
+      data = allData.filter( film => film.director == name)
+    }
+    
+    data.forEach(film => {
 
       
       if(select === 'Ascendente') {
@@ -82,7 +151,7 @@ function selectOrder(){
       
     })
     
-    let reverse = datosFilm.reverse();
+    let reverse = data.reverse();
     reverse.forEach(film => {
 
        if (select === 'Descendente') {
@@ -164,7 +233,7 @@ function fillSelect() {
             <section class="poster-section">
               <img src="${film.poster}">
             </section>
-            <h2 class="film-title2">${film.title}</h2>
+              <h2 class="film-title2">${film.title}</h2>
               <h3 class="description">${film.description}</h3>
               
           </div>
@@ -230,6 +299,7 @@ function selectDirectors() {
   let optionAll = document.createElement('option');
   optionAll.text = 'Directors';
   optionAll.value = 'all';
+
   directors.appendChild(optionAll); //creamos las opciones y se las agregamos al padre select
 
 
@@ -251,15 +321,17 @@ directors.addEventListener("change", function() {
   
   //que pelicula va impirmir por cada director
   //este recorre toda la data
-  container.innerHTML = ''
+    container.innerHTML = '';
+    orderFilm.innerHTML= '';   
+    orderFilm2.innerHTML= '';
+    infoFilms.innerHTML = '';
   allData.forEach(film => {
 
     idDirectorFilms.forEach(idDirectorFilm => {
           
           if(idDirectorFilm === film.id) {
 
-            console.log('hjklñ')
-
+           
             let nuevoElemento = document.createElement("div");
             nuevoElemento.setAttribute("id", film.id)
             nuevoElemento.setAttribute("class", "wrapper-grid")
@@ -319,11 +391,7 @@ directors.addEventListener("change", function() {
 });
 
 
-buttonInicio.addEventListener('click', () => {
-  console.log('hola');
-  container.innerHTML = ''
-  fillSelect();
-})
+
 
 
 fillSelect();
