@@ -56,22 +56,27 @@ h1 {
 }
 
 #link1 {
-  left: 1160px;
+  left: 1270px;
 }
 
 #link2 {
-  left: 990px;
+  left: 1100px;
 }
 
 #button-inicio {
   top: 30px;
-  left: 820px;
+  left: 930px;
 }
 .img-chibi {
   width: 70px;
   position: absolute;
   top: 15px;
   left: 100px;
+}
+
+#btnFilms {
+  top: 30px;
+  left: 930px;
 }
 
 
@@ -324,7 +329,7 @@ h1 {
 
 .container-slider {
   /* width: 100%; */
-  /* max-width: 100%; */
+  max-width: 100%;
   /* margin: auto; */
   overflow: hidden;
   position: relative;
@@ -332,7 +337,8 @@ h1 {
   /* width: 200px; */
   /* min-height:100%; */
   height: auto;
- 
+ /* background-size: contain; */
+ object-fit: cover;
   
 }
 
@@ -344,7 +350,10 @@ h1 {
   /* background-size: 100% 100vh; */
   /* min-height:100%; */
   /* line-height:1.6em; */
-  height: 753px;
+  /* height: 753px; */
+  height: auto;
+  background-size: cover;
+
   
 }
 
@@ -352,6 +361,7 @@ h1 {
   width: 100%;
   /* min-height:100%; */
  /* background-size: 100% 100vh; */
+ background-size: cover;
 }
 
 .slider-img {
@@ -401,19 +411,6 @@ h1 {
   right: 10px;
 }
 
-.btnFilms {
-  position: absolute;
-  width: 150px;
-  height: 60px;
-  font-size: 28px;
-  font-weight: bold;
-  background-color: #31f2df;
-  left: 1150px;
-  top: 475px;
-  border: 4px solid transparent;
-  border-radius: 17px;
-  cursor: pointer;
-}
 
 .btnFilms:hover {
   background: #fff;

@@ -1,11 +1,7 @@
-// el archivo main es encargado de todo el html (dom)
-
-import { sendData,  getIdTitles, getIdDirectors} from './data.js';
+import { sendData, getIdDirectors} from './data.js';
 let allData = sendData();
 
-
 let container = document.getElementById('container');
-
 let directors = document.getElementById('directors');
 let infoFilms = document.getElementById('infoFilms');
 let orderFilm = document.getElementById('orderFilm');
@@ -13,13 +9,10 @@ let orderFilm2 = document.getElementById('orderFilm2');
 let order_film = document.getElementById('order_film');
 let buttonInicio = document.getElementById('button-inicio');
 let btnFilms = document.getElementById('btnFilms');
-// let containerSlider = document.getElementById('container-slider');
-// let encabezado = document.getElementByI("encabezado");
-
 let allDirectors = getIdDirectors(allData);
 
 
-
+//botón para ver las peliculas
 btnFilms.addEventListener('click', function() {
 
   container.style = "display: block";
@@ -87,9 +80,9 @@ function selectOrder(){
 
   option1.text = 'Sort by';
   option1.value = 'Sort by';
-  option2.text = 'Descendente';
+  option2.text = 'Z - A';
   option2.value = 'Ascendente';
-  option3.text = 'Ascendente';
+  option3.text = 'A - Z';
   option3.value = 'Descendente';
 
   order_film.appendChild(option1);
