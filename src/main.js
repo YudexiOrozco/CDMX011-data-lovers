@@ -1,6 +1,6 @@
-import { sendData, getIdDirectors} from './data.js';
-let allData = sendData();
+import { sendData, getIdDirectors, createHtmlFilm, sortData } from './data.js';
 
+let allData = sendData();
 let container = document.getElementById('container');
 let directors = document.getElementById('directors');
 let infoFilms = document.getElementById('infoFilms');
@@ -10,27 +10,12 @@ let order_film = document.getElementById('order_film');
 let buttonInicio = document.getElementById('button-inicio');
 let btnFilms = document.getElementById('btnFilms');
 let allDirectors = getIdDirectors(allData);
-
-
-//botón para ver las peliculas
-btnFilms.addEventListener('click', function() {
-
-  container.style = "display: block";
-  slider.style = "display: none";
-  btnFilms.style = "display: none";
-  directors.style = "display: block";
-  order_film.style = "display: block";
-  buttonInicio.style = "display: block";
-
-});
-
-
+// slider
+const btnLeft = document.querySelector("#btn-left");
+const btnRight = document.querySelector("#btn-right");
 let slider = document.querySelector("#slider");
 let sliderSection = document.querySelectorAll(".slider-section");
 let sliderSectionLast = sliderSection[sliderSection.length -1];
-
-const btnLeft = document.querySelector("#btn-left");
-const btnRight = document.querySelector("#btn-right");
 
 slider.insertAdjacentElement('afterbegin', sliderSectionLast);
 
@@ -61,7 +46,6 @@ btnRight.addEventListener('click', function() {
   sliderNext();
 });
 
-
 btnLeft.addEventListener('click', function() {
   sliderPrev();
 });
@@ -71,9 +55,17 @@ setInterval(() => {
 }, 5000);
 
 
- 
-function selectOrder(){
-
+//botón para ver las peliculas
+btnFilms.addEventListener('click', function() {
+  container.style = "display: block";
+  slider.style = "display: none";
+  btnFilms.style = "display: none";
+  directors.style = "display: block";
+  order_film.style = "display: block";
+  buttonInicio.style = "display: block";
+});
+//select para ordenar
+function selectOrder() {
   let option1 = document.createElement('option');
   let option2 = document.createElement('option');
   let option3 = document.createElement('option');
@@ -88,101 +80,26 @@ function selectOrder(){
   order_film.appendChild(option1);
   order_film.appendChild(option2);
   order_film.appendChild(option3);
-
-  let datosFilm = [];
-  
-
-  allData.forEach(film => {
-    datosFilm.push({
-      title: film.title,
-      id: film.id,
-      poster: film.poster
-    }) 
-  
-  
-  datosFilm.sort(function (a, b) {
-    if (a.title > b.title) {
-      return 1;
-    }
-    if (a.title < b.title) {
-      return -1;
-    }
-    return 0;
-  })
-
-  
-
-  order_film.addEventListener("change", () => {
-  
-    let html2 = '';
-    let html3 = '';
-    let select = (order_film.value);
-    container.innerHTML = '';
-    orderFilm.innerHTML= '';   
-    orderFilm2.innerHTML= '';
-    infoFilms.innerHTML = '';
-
-
-    let data = datosFilm;
-    let directorValue = directors.value;
-
-    if(directorValue != 'all') {
-      let name = allDirectors[directorValue].name_director;
-
-      data = allData.filter( film => film.director == name)
-    }
-    
-    data.forEach(film => {
-
-      
-      if(select === 'Ascendente') {
-
-        html2 += `<div id="wrapper-grid" class="wrapper-grid">
-                    <div class="container-2">
-                    <img class="img-poster" src="${film.poster}">
-                      <div class="capa">
-                      <h2 class="film-title">${film.title}</h2>
-                      <img class="img-hoja" ${'src=images/hoja.png'}>
-                      <p class="release-date">${'Release Date:'+' '+film.release_date}</p>
-                      </div>
-                   </div>
-                  </div>`
-      }
-      
-    })
-    
-    let reverse = data.reverse();
-    reverse.forEach(film => {
-
-       if (select === 'Descendente') {
-        
-          html3 += `<div id="wrapper-grid" class="wrapper-grid">
-                      <div class="container-2">
-                      <img class="img-poster" src="${film.poster}">
-                        <div class="capa">
-                        <h2 class="film-title">${film.title}</h2>
-                        <img class="img-hoja" ${'src=images/hoja.png'}>
-                        <p class="release-date">${'Release Date:'+' '+film.release_date}</p>
-                        </div>
-                      </div>
-                    </div>`
-      }
-
-    })
-    orderFilm.innerHTML= html2;   
-    orderFilm2.innerHTML= html3;
-    
-    
-  });
- })
 }
 
-selectOrder();
-  
+order_film.addEventListener("change", () => {
+  container.innerHTML = '';
+  orderFilm.innerHTML= '';   
+  infoFilms.innerHTML = '';
 
+  let data = allData;
+  let directorValue = directors.value;
 
-//////////////////////////////
+  if(directorValue != 'all') {
+    let name = allDirectors[directorValue].name_director; // ----pendiente
 
+    data = allData.filter( film => film.director == name)
+  }
+
+  let orderData = sortData(data, 'title', order_film.value);
+
+  orderFilm.innerHTML = createHtmlFilm(orderData);
+});
 
 
 function fillSelect() {
@@ -348,4 +265,5 @@ directors.addEventListener("change", function() {
 })
 
 fillSelect();
+selectOrder();
 selectDirectors();

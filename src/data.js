@@ -50,3 +50,50 @@ export function getIdDirectors(films) {
 
   return(directorsHash);
 }
+
+export function sortData(data, sortBy, sortOrder) {
+    if(sortOrder === 'Ascendente') {
+      data.sort(function (a, b) {
+        if (a[sortBy] > b[sortBy]) {
+          return 1;
+        }
+        if (a[sortBy] < b[sortBy]) {
+          return -1;
+        }
+        return 0;
+      })
+     }    
+      
+    if (sortOrder === 'Descendente') {
+      data.sort(function (a, b) {
+        if (a[sortBy] > b[sortBy]) {
+          return -1;
+        }
+        if (a[sortBy] < b[sortBy]) {
+          return 1;
+        }
+        return 0;
+      })
+    }
+
+    return data;
+
+}
+
+export function createHtmlFilm(data) {
+  let html = '';
+
+  data.forEach(film => {
+    html += `<div id="wrapper-grid" class="wrapper-grid">
+                <div class="container-2">
+                <img class="img-poster" src="${film.poster}">
+                  <div class="capa">
+                  <h2 class="film-title">${film.title}</h2>
+                  <img class="img-hoja" ${'src=images/hoja.png'}>
+                  <p class="release-date">${'Release Date:'+' '+film.release_date}</p>
+                  </div>
+              </div>
+              </div>`
+  })
+  return html;
+}
