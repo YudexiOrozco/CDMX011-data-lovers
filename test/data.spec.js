@@ -1,23 +1,12 @@
-import { example, anotherExample } from '../src/data.js';
+import { sortData } from '../src/data.js';
+import { filmsMock } from './dataMock';
 
 
-describe('example', () => {
-  it('is a function', () => {
-    expect(typeof example).toBe('function');
-  });
+describe('ordenamiento', () => {
+  it('ordena la data de forma ascendente', () => {
+    let orderedData = sortData(filmsMock, 'title', 'Ascendente');
 
-  it('returns `example`', () => {
-    expect(example()).toBe('example');
-  });
-});
-
-
-describe('anotherExample', () => {
-  it('is a function', () => {
-    expect(typeof anotherExample).toBe('function');
-  });
-
-  it('returns `anotherExample`', () => {
-    expect(anotherExample()).toBe('OMG');
+    expect(orderedData).toHaveLength(2);
+    expect(orderedData[0].title).toBe("Castle in the Sky");
   });
 });

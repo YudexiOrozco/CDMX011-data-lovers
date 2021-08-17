@@ -54,6 +54,7 @@ export function getIdDirectors(films) {
 export function sortData(data, sortBy, sortOrder) {
     if(sortOrder === 'Ascendente') {
       data.sort(function (a, b) {
+       
         if (a[sortBy] > b[sortBy]) {
           return 1;
         }
