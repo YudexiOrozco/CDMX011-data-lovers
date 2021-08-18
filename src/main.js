@@ -9,6 +9,15 @@ let order_film = document.getElementById('order_film');
 let buttonInicio = document.getElementById('button-inicio');
 let btnFilms = document.getElementById('btnFilms');
 let allDirectors = getIdDirectors(allData);
+// let navBar = document.getElementById("myTopnav");
+// let menu = document.getElementById("menu");
+const bar = document.querySelector(".fa-bars");
+const menu = document.querySelector(".menu");
+
+bar.addEventListener("click", () => {
+  menu.classList.toggle("show-menu");
+});
+
 // slider
 const btnLeft = document.querySelector("#btn-left");
 const btnRight = document.querySelector("#btn-right");
@@ -71,9 +80,9 @@ function selectOrder() {
 
   option1.text = 'Sort by';
   option1.value = 'Sort by';
-  option2.text = 'Z - A';
+  option2.text = 'A - Z';
   option2.value = 'Ascendente';
-  option3.text = 'A - Z';
+  option3.text = 'Z - A';
   option3.value = 'Descendente';
 
   order_film.appendChild(option1);
@@ -209,6 +218,18 @@ function clearDivs() {
   orderFilm.innerHTML= '';   
   infoFilms.innerHTML = '';
 }
+
+buttonInicio.addEventListener("click", function() {
+  location.href = 'index.html'
+})
+
+// menu.addEventListener("click", function() {
+//   if (menu.className === "topnav") {
+//     menu.className += " responsive";
+//   } else {
+//     menu.className = "topnav";
+//   }
+// })
 
 fillSelect();
 selectOrder();

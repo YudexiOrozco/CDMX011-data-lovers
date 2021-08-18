@@ -4,13 +4,60 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
   <title>Studio Ghibli</title>
   <link rel="stylesheet" href="style.css" />
   </head>
   <body>
   <header>
-    <section id="encabezado" class="encabezado">
+    <nav>
+      <div class="nav-main">
+          <div class="nav-header">
+            <img class= "img-chibi" src="images/chibi.png">
+            <h1>STUDIO GHIBLI</h1>
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </div>
+          <ol class="menu">
+            
+              <li>
+                <a class="links-pages" id="button-inicio" style="display:none">Home</a>
+              </li>
+              <li>
+                <a id="btnFilms" class="links-pages">Films</a>
+              </li>
+              <li>
+                <a href="https://ghiblicollection.com/" id="link1" class="links-pages">Collection</a>
+             </li>
+              <li>
+                <a href="https://es-la.facebook.com/FansOfStudioGhibli/" id="link2" class="links-pages">Fanpage</a>
+              </li>
+          </ol>
+      </div>
+     
+  </nav>
+
+
+    <!-- <nav class="topnav" id="myTopnav">
+      <h1>STUDIO GHIBLI</h1>
+      <img class= "img-chibi" src="images/chibi.png">
+
+      <a id="btnFilms" class="links-pages">Films</a>
+      <a href="https://ghiblicollection.com/" id="link1" class="links-pages">Collection</a>
+      <a href="https://es-la.facebook.com/FansOfStudioGhibli/" id="link2" class="links-pages">Fanpage</a>
+      <a class="links-pages" id="button-inicio" style="display:none">Home</a>
+
+
+
+      <a href="javascript:void(0);" class="icon" id="menu">
+        <i class="fa fa-bars"></i>
+      </a>
+    </nav> -->
+
+
+    <!-- <section id="encabezado" class="encabezado">
       <h1>STUDIO GHIBLI</h1>
       <img class= "img-chibi" src="images/chibi.png">
       <form method="get" action="https://ghiblicollection.com/">
@@ -23,7 +70,7 @@
         <button class="links-pages" id="button-inicio" style="display:none">Home</button>
       </form>
       <button id="btnFilms" class="links-pages">Films</button>
-    </section>
+    </section> -->
     </header> 
     <main>
       <div id="container-slider" class="container-slider">
@@ -47,8 +94,10 @@
       </div>
 
       <div class="filters">
-        <select id="order_film" class="select" style= "display: none"></select>
-        <select id="directors" class="select" style= "display: none"></select>
+        <section id="selectors">
+          <select id="directors" class="select" style= "display: none"></select>
+          <select id="order_film" class="select" style= "display: none"></select>
+        </section>
         
         <div id="container" class="container" style= "display: none"></div>
 
