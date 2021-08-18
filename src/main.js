@@ -1,11 +1,10 @@
-import { sendData, getIdDirectors, createHtmlFilm, sortData } from './data.js';
+import { sendData, getIdDirectors, sortData, filterData } from './data.js';
 
 let allData = sendData();
 let container = document.getElementById('container');
 let directors = document.getElementById('directors');
 let infoFilms = document.getElementById('infoFilms');
 let orderFilm = document.getElementById('orderFilm');
-let orderFilm2 = document.getElementById('orderFilm2');
 let order_film = document.getElementById('order_film');
 let buttonInicio = document.getElementById('button-inicio');
 let btnFilms = document.getElementById('btnFilms');
@@ -83,9 +82,7 @@ function selectOrder() {
 }
 
 order_film.addEventListener("change", () => {
-  container.innerHTML = '';
-  orderFilm.innerHTML= '';   
-  infoFilms.innerHTML = '';
+  clearDivs();
 
   let data = allData;
   let directorValue = directors.value;
@@ -95,77 +92,90 @@ order_film.addEventListener("change", () => {
 
     data = allData.filter( film => film.director == name)
   }
-
+  // se llama a la funcion de ordenar 'Ascendente' o 'Descendente'
   let orderData = sortData(data, 'title', order_film.value);
 
   orderFilm.innerHTML = createHtmlFilm(orderData);
 });
 
+function createHtmlFilm(data) {
+  let html = '';
 
-function fillSelect() {
- 
-  let html = "";
- 
-  allData.forEach(film => {
-    let nuevoElemento = document.createElement("div");
-    nuevoElemento.setAttribute("id", film.id)
-    nuevoElemento.setAttribute("class", "wrapper-grid")
-
-    html = `<div class="container-2">
+  data.forEach(film => {
+    html += `<div id="wrapper-grid" class="wrapper-grid">
+                <div class="container-2">
                 <img class="img-poster" src="${film.poster}">
-                <div class="capa">
+                  <div class="capa">
                   <h2 class="film-title">${film.title}</h2>
                   <img class="img-hoja" ${'src=images/hoja.png'}>
                   <p class="release-date">${'Release Date:'+' '+film.release_date}</p>
-                </div>
+                  </div>
               </div>
-              `
-    nuevoElemento.innerHTML = html;
+              </div>`
+  })
+  return html;
+}
 
-  container.appendChild(nuevoElemento);
- 
-  nuevoElemento.addEventListener("click", () => {
-     allData.forEach(film => {
-     
-       if (nuevoElemento.id === film.id) {
-      
-         container.innerHTML = ''
-          let element =
-          `<div class="divSection">
-            <section class="poster-section">
-              <img src="${film.poster}">
-            </section>
-              <h2 class="film-title2">${film.title}</h2>
-              <h3 class="description">${film.description}</h3>
-              
-          </div>
-        `
+function fillSelect() {
+  allData.forEach(film => {
+    loadHtmlFilm(film) 
+  });
+}
 
-        film.people.forEach(person => {
-          element += `<div class="wrapper-grid-people">
-                        <div class="container-people">
-                          <section class="person-data">
-                            <h2 class="person-name">${person.name}</h2>
-                            <p>${'<b>Gender: </b>' + person.gender}</p>
-                            <p>${'<b>Age: </b>' + person.age}</p>
-                            <p>${'<b>Eye color: </b>' + person.eye_color}</p>
-                            <p>${'<b>Hair color: </b>' + person.hair_color}</p>
-                            <p>${'<b>Specie: </b>' + person.specie}</p>
-                          </section>
-                          <img class="img-poster" src="${person.img}">
-                        </div>
-                      </div>`
-        })
-        infoFilms.innerHTML = element;
-      }
-    })  
+function loadHtmlFilm(film) {
+  let html = "";
+  let filmDiv = document.createElement("div");
+  filmDiv.setAttribute("id", film.id)
+  filmDiv.setAttribute("class", "wrapper-grid")
+
+  html = `<div class="container-2">
+              <img class="img-poster" src="${film.poster}">
+              <div class="capa">
+                <h2 class="film-title">${film.title}</h2>
+                <img class="img-hoja" ${'src=images/hoja.png'}>
+                <p class="release-date">${'Release Date:'+' '+film.release_date}</p>
+              </div>
+            </div>
+            `
+  filmDiv.innerHTML = html;
+  container.appendChild(filmDiv);
+
+  filmDiv.addEventListener("click", () => {
+    
+    let dataFilm = filterData(allData, film.id)
+
+    container.innerHTML = ''
+    let element =
+        `<div class="divSection">
+          <section class="poster-section">
+            <img src="${dataFilm.poster}">
+          </section>
+            <h2 class="film-title2">${dataFilm.title}</h2>
+            <h3 class="description">${dataFilm.description}</h3>
+        </div>
+      `
+
+    dataFilm.people.forEach(person => {
+      element += `<div class="wrapper-grid-people">
+                    <div class="container-people">
+                      <section class="person-data">
+                        <h2 class="person-name">${person.name}</h2>
+                        <p>${'<b>Gender: </b>' + person.gender}</p>
+                        <p>${'<b>Age: </b>' + person.age}</p>
+                        <p>${'<b>Eye color: </b>' + person.eye_color}</p>
+                        <p>${'<b>Hair color: </b>' + person.hair_color}</p>
+                        <p>${'<b>Specie: </b>' + person.specie}</p>
+                      </section>
+                      <img class="img-poster" src="${person.img}">
+                    </div>
+                  </div>`
+    })
+    infoFilms.innerHTML = element;  
   })  
-});
 }
 
 //Agregar opciones al select de Directors, que seria 'directors'
-function selectDirectors() {
- 
+function fillSelectDirectors() {
   let optionAll = document.createElement('option');
   optionAll.text = 'Directors';
   optionAll.value = 'all';
@@ -182,88 +192,24 @@ function selectDirectors() {
 }
 
 directors.addEventListener("change", function() {
+  clearDivs();
   let idDirector = directors.value; 
-  let html = "";
   //todos los id de sus peliculas
   let idDirectorFilms = allDirectors[idDirector].id_films; 
-  
+
+  idDirectorFilms.forEach(idDirectorFilm => {
+    let dataFilm = filterData(allData, idDirectorFilm)
+
+    loadHtmlFilm(dataFilm) 
+  })
+});
+
+function clearDivs() {
   container.innerHTML = '';
   orderFilm.innerHTML= '';   
-  orderFilm2.innerHTML= '';
   infoFilms.innerHTML = '';
-  
-  allData.forEach(film => {
-
-    idDirectorFilms.forEach(idDirectorFilm => {
-          
-        if(idDirectorFilm === film.id) {
-
-           
-            let nuevoElemento = document.createElement("div");
-            nuevoElemento.setAttribute("id", film.id)
-            nuevoElemento.setAttribute("class", "wrapper-grid")
-
-            html = `<div class="container-2">
-            <img class="img-poster" src="${film.poster}">
-            <div class="capa">
-              <h2 class="film-title">${film.title}</h2>
-              <img class="img-hoja" ${'src=images/hoja.png'}>
-              <p class="release-date">${'Release Date:'+' '+film.release_date}</p>
-            </div>
-          </div>
-          `
-          nuevoElemento.innerHTML = html;
-
-          container.appendChild(nuevoElemento)
-
-          nuevoElemento.addEventListener("click", () => {
-
-            
-             allData.forEach(film => {
-             
-               if (nuevoElemento.id === film.id) {
-                
-                 container.innerHTML = ''
-                //  infoFilms.innerHTML =
-                //  let element = 
-                 let element =
-                           `<div class="divSection">
-                             <section class="poster-section">
-                               <img src="${film.poster}">
-                             </section>
-                               <h2 class="film-title2">${film.title}</h2>
-                               <h3 class="description">${film.description}</h3>
-                               
-                           </div>
-                         `
-                 
-                         film.people.forEach(person => {
-                           element += `<div class="wrapper-grid-people">
-                                         <div class="container-people">
-                                           <section class="person-data">
-                                             <h2 class="person-name">${person.name}</h2>
-                                             <p>${'<b>Gender: </b>' + person.gender}</p>
-                                             <p>${'<b>Age: </b>' + person.age}</p>
-                                             <p>${'<b>Eye color: </b>' + person.eye_color}</p>
-                                             <p>${'<b>Hair color: </b>' + person.hair_color}</p>
-                                             <p>${'<b>Specie: </b>' + person.specie}</p>
-                                           </section>
-                                           <img class="img-poster" src="${person.img}">
-                                         </div>
-                                       </div>`
-                         })
-                         infoFilms.innerHTML = element;
-               }
-        
-             });
-              
-        });
-      }
-    });
-  });
-
-})
+}
 
 fillSelect();
 selectOrder();
-selectDirectors();
+fillSelectDirectors();
