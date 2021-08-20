@@ -48,9 +48,10 @@
 
 ![prototipo_baja_fidelidad](src/images/prototipo-baja-fidelidad.jpg)
 ![prototipo2](src/images/prototipo2.jpg)
-![studio1](src/images/studio1.jpg)
-![studio2](src/images/studio2.jpg)
-![studio3](src/images/studio3.jpg)
+![studio1](src/images/studio1.png)
+![studio2](src/images/studio2.png)
+![studio3](src/images/studio3.png)
+
 ![prototipo-final1](src/images/prototipo-final1.jpg)
 ![prototipo-final2](src/images/prototipo-final2.jpg)
 ![prototipo-final3](src/images/prototipo-final3.jpg)
