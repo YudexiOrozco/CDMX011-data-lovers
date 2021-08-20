@@ -5,113 +5,71 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
   <title>Studio Ghibli</title>
   <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
+</head>
+<body>
   <header>
-    <nav>
-      <div class="nav-main">
-          <div class="nav-header">
-            <img class= "img-chibi" src="images/chibi.png">
-            <h1>STUDIO GHIBLI</h1>
-            <i class="fa fa-bars" aria-hidden="true"></i>
-          </div>
-          <ol class="menu">
-            
-              <li>
-                <a class="links-pages" id="button-inicio" style="display:none">Home</a>
-              </li>
-              <li>
-                <a id="btnFilms" class="links-pages">Films</a>
-              </li>
-              <li>
-                <a href="https://ghiblicollection.com/" id="link1" class="links-pages">Collection</a>
-             </li>
-              <li>
-                <a href="https://es-la.facebook.com/FansOfStudioGhibli/" id="link2" class="links-pages">Fanpage</a>
-              </li>
-          </ol>
-      </div>
-     
-  </nav>
-
-
-    <!-- <nav class="topnav" id="myTopnav">
-      <h1>STUDIO GHIBLI</h1>
-      <img class= "img-chibi" src="images/chibi.png">
-
-      <a id="btnFilms" class="links-pages">Films</a>
-      <a href="https://ghiblicollection.com/" id="link1" class="links-pages">Collection</a>
-      <a href="https://es-la.facebook.com/FansOfStudioGhibli/" id="link2" class="links-pages">Fanpage</a>
-      <a class="links-pages" id="button-inicio" style="display:none">Home</a>
-
-
-
-      <a href="javascript:void(0);" class="icon" id="menu">
-        <i class="fa fa-bars"></i>
-      </a>
-    </nav> -->
-
-
-    <!-- <section id="encabezado" class="encabezado">
-      <h1>STUDIO GHIBLI</h1>
-      <img class= "img-chibi" src="images/chibi.png">
-      <form method="get" action="https://ghiblicollection.com/">
-        <button class="links-pages" id="link1" >Collection</button>
-      </form>
-      <form method="get" action="https://es-la.facebook.com/FansOfStudioGhibli/">
-        <button class="links-pages" id="link2" >Fanpage</button>
-      </form>
-      <form method="get" action="index.html">
-        <button class="links-pages" id="button-inicio" style="display:none">Home</button>
-      </form>
-      <button id="btnFilms" class="links-pages">Films</button>
-    </section> -->
-    </header> 
-    <main>
-      <div id="container-slider" class="container-slider">
-        <div class="slider" id="slider">
-          <div class="slider-section">
-            <img src="images/img1.png" alt="" class="slider-img">
-          </div>
-          <div class="slider-section">
-            <img src="images/img2.jpg" alt="" class="slider-img">
-          </div>
-          <div class="slider-section">
-            <!-- <div class="textSlider">“They Say That The Best Blaze Burns Brightest When Circumstances Are At Their Worst.” - Howl's Moving Castle (2004)</div> -->
-            <img src="images/img3.jpg" alt="" class="slider-img">
-          </div>
-          <div class="slider-section">
-            <img src="images/img4.jpg" alt="" class="slider-img">
-          </div>
-          <div class="slider_btn slider_btn-right" id="btn-right">&#62;</div>
-          <div class="slider_btn slider_btn-left" id="btn-left">&#60;</div>
+    <nav class="nav-main">
+        <div class="nav-header">
+          <img class= "img-chibi" id="img-chibi" src="images/chibi.png">
+          <h1>STUDIO GHIBLI</h1>
+          <i class="fa fa-bars" aria-hidden="true"></i>
         </div>
+        <ol class="menu">
+          <li>
+            <a class="links-pages" id="button-inicio" style="display:none">Home</a>
+          </li>
+          <li>
+            <a id="btnFilms" class="links-pages">Films</a>
+          </li>
+          <li>
+            <a href="https://ghiblicollection.com/" id="link1" class="links-pages">Collection</a>
+          </li>
+          <li>
+            <a href="https://es-la.facebook.com/FansOfStudioGhibli/" id="link2" class="links-pages">Fanpage</a>
+          </li>
+        </ol> 
+    </nav>
+  </header> 
+  <main>
+    <section id="container-slider" class="container-slider">
+      <div class="slider" id="slider">
+        <div class="slider-section">
+          <img src="images/img1.png" alt="" class="slider-img">
+        </div>
+        <div class="slider-section">
+          <img src="images/img2.jpg" alt="" class="slider-img">
+        </div>
+        <div class="slider-section">
+          <img src="images/img3.jpg" alt="" class="slider-img">
+        </div>
+        <div class="slider-section">
+          <img src="images/img4.jpg" alt="" class="slider-img">
+        </div>
+        <div class="slider_btn slider_btn-right" id="btn-right">&#62;</div>
+        <div class="slider_btn slider_btn-left" id="btn-left">&#60;</div>
       </div>
-
-      <div class="filters">
-        <section id="selectors">
-          <select id="directors" class="select" style= "display: none"></select>
-          <select id="order_film" class="select" style= "display: none"></select>
-        </section>
-        
-        <div id="container" class="container" style= "display: none"></div>
-
-        <div class="container" id="orderFilm"></div>
-        <div class="container" id="orderFilm2"></div>
-        
-        <div id="infoFilms"></div>
-        
-      </div>
-    </main>
-   
-
-
-    <script src="main.js" type="module"></script>
-    <footer></footer>
+    </section>
+    <article id="about" class="about">
+      <h2>About:</h2>
+      <p class="p-first">Studio Ghibli was founded in 1985 in Tokyo by the three men, Isao Takahata, Toshio Suzuki and the well-known film producer Hayao Miyazaki. The name Studio Ghibli was based on the Arabic name for "hot sahara wind" because the founders wanted Studio Ghibli to blow new wind through the anime industry. At the same time Ghibli was also the name of an Italian war plane and therefore it also represented Hayao Miyazaki's love for planes and for Italy.Before Miyazaki worked for Ghibli he had already directed a few films like Lupin the Third: The Castle of Cagliostro and Future Boy Conan. The first original movie directed by Miyazaki was Nausicaa of the Valley of the Wind in 1984. Some people argue that it's not a real Ghibli production because the movie was released a year earlier than the official formation of Studio Ghibli. The official first Ghibli movie was Laputa: Castle in the Sky.</p>
+      <p class="p-second">At this time anime was looked down upon in the film industry and Miyazaki a now influential and respected director was also not highly regarded at this time. Anime wasn't mainstream like it is nowadays in Japan, therefore the number of theaters showing the movies as well as viewers were also limited. Movies that are now regarded as big successes like Nausicaa of the Valley of the Wind, Castle in the Sky and even My Neighbor Totoro were not famous at all back then.</p>
+      <img class="img-totoro" src="images/totoro.gif">
+      <img class="img-hayao" src="images/hayao.png">
+    </article>
+    <section class="filters">
+      <section id="selectors">
+      <select id="directors" class="select" style= "display: none"></select>
+      <select id="order_film" class="select" style= "display: none"></select>
+    </section>
+      <div id="container" class="container" style= "display: none"></div>
+      <div class="container" id="orderFilm"></div>
+      <div class="container" id="orderFilm2"></div>
+      <div id="infoFilms"></div>
+  </main>
+  <script src="main.js" type="module"></script>
+  <footer></footer>
   </body>
 </html>

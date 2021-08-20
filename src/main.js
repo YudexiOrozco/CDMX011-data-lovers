@@ -1,16 +1,17 @@
 import { sendData, getIdDirectors, sortData, filterData } from './data.js';
 
-let allData = sendData();
+const allData = sendData();
 let container = document.getElementById('container');
 let directors = document.getElementById('directors');
 let infoFilms = document.getElementById('infoFilms');
 let orderFilm = document.getElementById('orderFilm');
 let order_film = document.getElementById('order_film');
-let buttonInicio = document.getElementById('button-inicio');
-let btnFilms = document.getElementById('btnFilms');
-let allDirectors = getIdDirectors(allData);
-// let navBar = document.getElementById("myTopnav");
-// let menu = document.getElementById("menu");
+const buttonInicio = document.getElementById('button-inicio');
+const btnFilms = document.getElementById('btnFilms');
+const about = document.getElementById('about');
+const allDirectors = getIdDirectors(allData);
+const imgChibi = document.getElementById('img-chibi');
+// navBar
 const bar = document.querySelector(".fa-bars");
 const menu = document.querySelector(".menu");
 
@@ -62,7 +63,6 @@ setInterval(() => {
   sliderNext();
 }, 5000);
 
-
 //botón para ver las peliculas
 btnFilms.addEventListener('click', function() {
   container.style = "display: block";
@@ -71,7 +71,9 @@ btnFilms.addEventListener('click', function() {
   directors.style = "display: block";
   order_film.style = "display: block";
   buttonInicio.style = "display: block";
+  about.style = "display: none";
 });
+
 //select para ordenar
 function selectOrder() {
   let option1 = document.createElement('option');
@@ -97,33 +99,15 @@ order_film.addEventListener("change", () => {
   let directorValue = directors.value;
 
   if(directorValue != 'all') {
-    let name = allDirectors[directorValue].name_director; // ----pendiente
+    let name = allDirectors[directorValue];
 
-    data = allData.filter( film => film.director == name)
+    data = allData.filter(film => film.director == name.name_director);
   }
   // se llama a la funcion de ordenar 'Ascendente' o 'Descendente'
   let orderData = sortData(data, 'title', order_film.value);
 
-  orderFilm.innerHTML = createHtmlFilm(orderData);
+  orderData.forEach(film => loadHtmlFilm(film));
 });
-
-function createHtmlFilm(data) {
-  let html = '';
-
-  data.forEach(film => {
-    html += `<div id="wrapper-grid" class="wrapper-grid">
-                <div class="container-2">
-                <img class="img-poster" src="${film.poster}">
-                  <div class="capa">
-                  <h2 class="film-title">${film.title}</h2>
-                  <img class="img-hoja" ${'src=images/hoja.png'}>
-                  <p class="release-date">${'Release Date:'+' '+film.release_date}</p>
-                  </div>
-              </div>
-              </div>`
-  })
-  return html;
-}
 
 function fillSelect() {
   allData.forEach(film => {
@@ -161,9 +145,9 @@ function loadHtmlFilm(film) {
           </section>
             <h2 class="film-title2">${dataFilm.title}</h2>
             <h3 class="description">${dataFilm.description}</h3>
+            <h4 class="characters">Characters:</h4>
         </div>
       `
-
     dataFilm.people.forEach(person => {
       element += `<div class="wrapper-grid-people">
                     <div class="container-people">
@@ -203,14 +187,22 @@ function fillSelectDirectors() {
 directors.addEventListener("change", function() {
   clearDivs();
   let idDirector = directors.value; 
-  //todos los id de sus peliculas
-  let idDirectorFilms = allDirectors[idDirector].id_films; 
+  
+  if (idDirector == 'all'){
+    allData.forEach(film => {
+      loadHtmlFilm(film); 
+    })
 
-  idDirectorFilms.forEach(idDirectorFilm => {
-    let dataFilm = filterData(allData, idDirectorFilm)
+  } else {
+    //todos los id de sus peliculas
+    let idFilms = allDirectors[idDirector].id_films;
 
-    loadHtmlFilm(dataFilm) 
-  })
+    idFilms.forEach(idDirectorFilm => {
+      let dataFilm = filterData(allData, idDirectorFilm)
+  
+      loadHtmlFilm(dataFilm) 
+    })
+  } 
 });
 
 function clearDivs() {
@@ -220,16 +212,11 @@ function clearDivs() {
 }
 
 buttonInicio.addEventListener("click", function() {
-  location.href = 'index.html'
+  location.href = 'index.html';
 })
-
-// menu.addEventListener("click", function() {
-//   if (menu.className === "topnav") {
-//     menu.className += " responsive";
-//   } else {
-//     menu.className = "topnav";
-//   }
-// })
+imgChibi.addEventListener("click", function() {
+  location.href = 'index.html';
+})
 
 fillSelect();
 selectOrder();

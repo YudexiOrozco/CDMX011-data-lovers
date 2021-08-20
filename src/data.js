@@ -7,20 +7,21 @@ export function sendData(){
 //Creando un objeto con un id de cada director con sus peliculas
 export function getIdDirectors(films) {
   let directorsHash = {};
+  let orderedData = sortData(films, 'director', 'Ascendente');
 
-    films.forEach(film => {
-      let keyDirector = film.director.toLowerCase().replaceAll(' ', '_'); 
+  orderedData.forEach(film => {
+    let keyDirector = film.director.toLowerCase().replaceAll(' ', '_'); 
+    
+    if(directorsHash[keyDirector] === undefined) {
+      directorsHash[keyDirector] = {}; 
+      directorsHash[keyDirector]['name_director'] = film.director; 
+      directorsHash[keyDirector]['id_films'] =  []; 
+      directorsHash[keyDirector]['id_films'].push(film.id);
       
-      if(directorsHash[keyDirector] === undefined) {
-        directorsHash[keyDirector] = {}; 
-        directorsHash[keyDirector]['name_director'] = film.director; 
-        directorsHash[keyDirector]['id_films'] =  []; 
-        directorsHash[keyDirector]['id_films'].push(film.id);
-        
-      }else{
-        directorsHash[keyDirector]['id_films'].push(film.id); 
-      }
-    });
+    }else{
+      directorsHash[keyDirector]['id_films'].push(film.id); 
+    }
+  });
 
   return(directorsHash);
 }
@@ -54,6 +55,5 @@ export function sortData(data, sortBy, sortOrder) {
       return 0;
     })
   }
-
   return data;
 }
